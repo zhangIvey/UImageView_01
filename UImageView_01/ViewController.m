@@ -36,6 +36,9 @@
 
 @end
 
+#define ImageName @"imageName"
+#define Description @"Description"
+
 @implementation ViewController
 
 
@@ -57,10 +60,10 @@
 - (NSArray *)imagesArray{
     if (_imagesArray == nil) {
         
-        NSDictionary *dic1 = @{@"imageName":@"2",@"imageDescription":@"第一张图片描述"};
-        NSDictionary *dic2 = @{@"imageName":@"3",@"imageDescription":@"第二张图片描述"};
-        NSDictionary *dic3 = @{@"imageName":@"4",@"imageDescription":@"第三张图片描述"};
-        NSDictionary *dic4 = @{@"imageName":@"5",@"imageDescription":@"第四张图片描述"};
+        NSDictionary *dic1 = @{ImageName:@"2",Description:@"第一张图片描述"};
+        NSDictionary *dic2 = @{ImageName:@"3",Description:@"第二张图片描述"};
+        NSDictionary *dic3 = @{ImageName:@"4",Description:@"第三张图片描述"};
+        NSDictionary *dic4 = @{ImageName:@"5",Description:@"第四张图片描述"};
         
         NSArray *array = @[dic1, dic2, dic3, dic4];
         _imagesArray = array;
@@ -136,7 +139,7 @@
     
     
     
-    self.imageDescriptionLabel.text = tempDic[@"imageDescription"];
+    self.imageDescriptionLabel.text = tempDic[Description];
     self.nextButton.enabled = self.currentIndex != 4;
     self.previousButton.enabled = self.currentIndex != 1;
 }
