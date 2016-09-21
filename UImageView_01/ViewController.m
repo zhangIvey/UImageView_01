@@ -26,12 +26,18 @@
 //当前图片的索引值
 @property (assign, nonatomic) int currentIndex;
 
+//存放字典类型的集合
+@property (strong, nonatomic) NSArray *imagesArray;
+
 
 - (IBAction)nextButtonClick:(id)sender;
 
 - (IBAction)previousButtonClick:(id)sender;
 
 @end
+
+#define ImageName @"imageName"
+#define Description @"Description"
 
 @implementation ViewController
 
@@ -50,6 +56,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+//懒加载，延迟加载 : 对get方法的重写
+- (NSArray *)imagesArray{
+    if (_imagesArray == nil) {
+        
+        NSDictionary *dic1 = @{ImageName:@"2",Description:@"第一张图片描述"};
+        NSDictionary *dic2 = @{ImageName:@"3",Description:@"第二张图片描述"};
+        NSDictionary *dic3 = @{ImageName:@"4",Description:@"第三张图片描述"};
+        NSDictionary *dic4 = @{ImageName:@"5",Description:@"第四张图片描述"};
+        
+        NSArray *array = @[dic1, dic2, dic3, dic4];
+        _imagesArray = array;
+    }
+    return _imagesArray;
+}
+
+
 /**
  *Function ：切换展示的图片
  *Parameter：
@@ -59,6 +81,8 @@
  */
 - (void)changImageView
 {
+    
+    /* 第一种方式
     switch (self.currentIndex) {
         case 1:
             self.imageOrderLabel.text = @"1/4";
@@ -90,6 +114,34 @@
     self.nextButton.enabled = self.currentIndex != 4;
     self.previousButton.enabled = self.currentIndex != 1;
 
+     */
+    
+    /*
+     第二种方式：使用字典类型来实现图片的加载
+     */
+    self.imageOrderLabel.text = [NSString stringWithFormat:@"%d/%ld",self.currentIndex,self.imagesArray.count];
+    NSDictionary *tempDic = [self.imagesArray objectAtIndex:self.currentIndex-1];
+    
+    
+#pragma mark  图片加载的知识点
+    //=================
+    //1 :[UIImage imageNamed]这种方式会有缓存，讲所有的图片加载到内存中；
+//    self.imageview.image = [UIImage imageNamed:tempDic[@"imageName"]];
+    
+    //2 :NSbundle的形式图片，没有文件夹的形式；
+//    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"6" ofType:@"jpg"];
+//    self.imageview.image = [[UIImage alloc] initWithContentsOfFile:imagePath];
+    
+    //3 :NSbundle的形式图片，有文件夹的形式；
+    NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/singleimage/8.jpg"];
+    self.imageview.image = [[UIImage alloc] initWithContentsOfFile:imagePath];
+    //=================
+    
+    
+    
+    self.imageDescriptionLabel.text = tempDic[Description];
+    self.nextButton.enabled = self.currentIndex != 4;
+    self.previousButton.enabled = self.currentIndex != 1;
 }
 
 /**
