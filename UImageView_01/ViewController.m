@@ -60,6 +60,7 @@
 - (NSArray *)imagesArray{
     if (_imagesArray == nil) {
         
+        /*第一种赋值方式 ：字典类型的赋值
         NSDictionary *dic1 = @{ImageName:@"2",Description:@"第一张图片描述"};
         NSDictionary *dic2 = @{ImageName:@"3",Description:@"第二张图片描述"};
         NSDictionary *dic3 = @{ImageName:@"4",Description:@"第三张图片描述"};
@@ -67,6 +68,29 @@
         
         NSArray *array = @[dic1, dic2, dic3, dic4];
         _imagesArray = array;
+         */
+        
+        /*
+         *第二种赋值方式 ： plist文件的赋值方式 NSBundle
+         */
+        //1 : plist文件的获取方式 path
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"imagesData" ofType:@"plist"];
+//        NSArray *array = [NSArray arrayWithContentsOfFile:filePath];
+        
+        //2 : plist文件的获取方式 url
+        
+        // url 获取文件方式A
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"imagesData" ofType:@"plist"];
+//        NSURL *url = [NSURL fileURLWithPath:filePath];
+        // url 获取文件方式B
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"imagesData" ofType:@"plist"];
+        //需要添加URL头
+        NSString *urlPath = [NSString stringWithFormat:@"file://%@",filePath];
+        NSURL *url = [NSURL URLWithString:urlPath];
+        NSArray *array = [NSArray arrayWithContentsOfURL:url];
+        
+        _imagesArray = array;
+        
     }
     return _imagesArray;
 }
@@ -126,15 +150,15 @@
 #pragma mark  图片加载的知识点
     //=================
     //1 :[UIImage imageNamed]这种方式会有缓存，讲所有的图片加载到内存中；
-//    self.imageview.image = [UIImage imageNamed:tempDic[@"imageName"]];
+    self.imageview.image = [UIImage imageNamed:tempDic[ImageName]];
     
     //2 :NSbundle的形式图片，没有文件夹的形式；
 //    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"6" ofType:@"jpg"];
 //    self.imageview.image = [[UIImage alloc] initWithContentsOfFile:imagePath];
     
     //3 :NSbundle的形式图片，有文件夹的形式；
-    NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/singleimage/8.jpg"];
-    self.imageview.image = [[UIImage alloc] initWithContentsOfFile:imagePath];
+//    NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/singleimage/8.jpg"];
+//    self.imageview.image = [[UIImage alloc] initWithContentsOfFile:imagePath];
     //=================
     
     
