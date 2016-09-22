@@ -83,6 +83,7 @@
 //        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"imagesData" ofType:@"plist"];
 //        NSURL *url = [NSURL fileURLWithPath:filePath];
         // url 获取文件方式B
+        /*
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"imagesData" ofType:@"plist"];
         //需要添加URL头
         NSString *urlPath = [NSString stringWithFormat:@"file://%@",filePath];
@@ -90,7 +91,20 @@
         NSArray *array = [NSArray arrayWithContentsOfURL:url];
         
         _imagesArray = array;
+        */
+        //通过model的形式进行封装赋值
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"imagesData" ofType:@"plist"];
+        //需要添加URL头
+        NSString *urlPath = [NSString stringWithFormat:@"file://%@",filePath];
+        NSURL *url = [NSURL URLWithString:urlPath];
+        NSArray *array = [NSArray arrayWithContentsOfURL:url];
         
+        NSMutableArray *modelArray = [NSMutableArray array];
+        for (NSDictionary *dic in array) {
+            ImageModel *model = [ImageModel imageModel:dic];
+            [modelArray addObject:model];
+        }
+        _imagesArray = modelArray;
     }
     return _imagesArray;
 }
@@ -143,6 +157,7 @@
     /*
      第二种方式：使用字典类型来实现图片的加载
      */
+    /*
     self.imageOrderLabel.text = [NSString stringWithFormat:@"%d/%ld",self.currentIndex,self.imagesArray.count];
     NSDictionary *tempDic = [self.imagesArray objectAtIndex:self.currentIndex-1];
     
@@ -159,13 +174,23 @@
     //3 :NSbundle的形式图片，有文件夹的形式；
 //    NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/singleimage/8.jpg"];
 //    self.imageview.image = [[UIImage alloc] initWithContentsOfFile:imagePath];
+    self.imageDescriptionLabel.text = tempDic[Description];
+    */
+    
+    
     //=================
     
+    ImageModel *model = self.imagesArray[self.currentIndex - 1];
+    
+    self.imageOrderLabel.text = [NSString stringWithFormat:@"%d/%ld",self.currentIndex,self.imagesArray.count];
+    self.imageview.image = [UIImage imageNamed:model.imageName];
+    self.imageDescriptionLabel.text = model.imageDescription;
     
     
-    self.imageDescriptionLabel.text = tempDic[Description];
-    self.nextButton.enabled = self.currentIndex != 4;
+    self.nextButton.enabled = self.currentIndex != self.imagesArray.count;
     self.previousButton.enabled = self.currentIndex != 1;
+    
+    
 }
 
 /**

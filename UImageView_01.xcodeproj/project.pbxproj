@@ -19,6 +19,7 @@
 		750078221D92675900947DD4 /* 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 750078201D92675900947DD4 /* 7.jpg */; };
 		750078241D92676300947DD4 /* singleimage in Resources */ = {isa = PBXBuildFile; fileRef = 750078231D92676300947DD4 /* singleimage */; };
 		750078261D92754900947DD4 /* imagesData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 750078251D92754900947DD4 /* imagesData.plist */; };
+		755A75171D93C2DA002B75BD /* ImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 755A75161D93C2DA002B75BD /* ImageModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		750078201D92675900947DD4 /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpg; sourceTree = "<group>"; };
 		750078231D92676300947DD4 /* singleimage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = singleimage; sourceTree = "<group>"; };
 		750078251D92754900947DD4 /* imagesData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = imagesData.plist; sourceTree = "<group>"; };
+		755A75151D93C2DA002B75BD /* ImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageModel.h; sourceTree = "<group>"; };
+		755A75161D93C2DA002B75BD /* ImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				750077EF1D922DC300947DD4 /* AppDelegate.m */,
 				750077F11D922DC300947DD4 /* ViewController.h */,
 				750077F21D922DC300947DD4 /* ViewController.m */,
+				755A75151D93C2DA002B75BD /* ImageModel.h */,
+				755A75161D93C2DA002B75BD /* ImageModel.m */,
 				750077F41D922DC300947DD4 /* Main.storyboard */,
 				750077F71D922DC300947DD4 /* Assets.xcassets */,
 				750077F91D922DC300947DD4 /* LaunchScreen.storyboard */,
@@ -300,6 +305,7 @@
 				750077F31D922DC300947DD4 /* ViewController.m in Sources */,
 				750077F01D922DC300947DD4 /* AppDelegate.m in Sources */,
 				750077ED1D922DC300947DD4 /* main.m in Sources */,
+				755A75171D93C2DA002B75BD /* ImageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

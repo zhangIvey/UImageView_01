@@ -26,5 +26,11 @@
 		<key>Description</key>
 		<string>第四张图片描述</string>
 	</dict>
+	<dict>
+		<key>imageName</key>
+		<string>6</string>
+		<key>Description</key>
+		<string>第五张图片描述</string>
+	</dict>
 </array>
 </plist>
