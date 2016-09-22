@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageModel.h"
 
 @interface ViewController : UIViewController
 
